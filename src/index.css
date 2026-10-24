@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #edf2e8;
+  --color-paper: #fbfcf7;
+  --color-ink: #14261e;
+  --color-pine: #0b6b45;
+  --color-pine-deep: #07462d;
+  --color-marigold: #f2a51d;
+  --color-chili: #e4572e;
+  --color-skye: #2e6fb7;
+  --color-plum: #7d3ac1;
+  --color-teal: #0e7490;
+
+  --font-display: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-urdu: "Noto Nastaliq Urdu", serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  background-image: radial-gradient(rgba(11, 107, 69, 0.07) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--color-marigold);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-pine);
+  outline-offset: 2px;
+}
+
+.font-urdu {
+  line-height: 2.1;
+}
+
+/* ---- truck-art stripe divider ---- */
+.stripes {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-marigold) 0 28px,
+    var(--color-pine) 28px 56px,
+    var(--color-chili) 56px 72px,
+    var(--color-ink) 72px 80px,
+    var(--color-paper) 80px 85px,
+    var(--color-pine-deep) 85px 113px
+  );
+}
+
+/* ---- transparency checkerboard ---- */
+.checker {
+  background-color: #e8ece2;
+  background-image:
+    linear-gradient(45deg, #d3dbc9 25%, transparent 25%, transparent 75%, #d3dbc9 75%),
+    linear-gradient(45deg, #d3dbc9 25%, transparent 25%, transparent 75%, #d3dbc9 75%);
+  background-size: 18px 18px;
+  background-position: 0 0, 9px 9px;
+}
+
+/* ---- form fields ---- */
+.field {
+  width: 100%;
+  border-radius: 10px;
+  border: 1.5px solid rgba(20, 38, 30, 0.18);
+  background: #fff;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--color-ink);
+  outline: none;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.field:focus {
+  border-color: var(--color-pine);
+  box-shadow: 0 0 0 3px rgba(11, 107, 69, 0.16);
+}
+.field::placeholder {
+  color: rgba(20, 38, 30, 0.35);
+}
+
+.lbl {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(20, 38, 30, 0.55);
+  margin-bottom: 6px;
+}
+
+/* ---- animations ---- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: marquee 45s linear infinite;
+  will-change: transform;
+}
+.ticker-shell:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.panel-in {
+  animation: panelIn 0.4s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.95); }
+  to { opacity: 1; transform: none; }
+}
+.toast-in {
+  animation: toastIn 0.28s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.shimmer {
+  background: linear-gradient(100deg, #e0e7d8 40%, #f1f4ea 50%, #e0e7d8 60%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(228, 87, 46, 0.55); }
+  60% { box-shadow: 0 0 0 6px rgba(228, 87, 46, 0); }
+}
+.live-dot {
+  animation: livePulse 1.6s ease-out infinite;
+}
+
+.qr-img {
+  image-rendering: pixelated;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track, .rise, .panel-in, .toast-in, .live-dot {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
